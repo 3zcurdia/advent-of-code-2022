@@ -6,52 +6,36 @@ defmodule Advent2022.Day02.Part1 do
 
   def solve(input) do
     input
-    |> decode()
+    |> String.split("\n", trim: true)
+    |> Enum.map(&String.split/1)
     |> Enum.map(&score/1)
     |> Enum.sum()
   end
 
-  defp score([:rock, b]) do
+  # oponent rock
+  defp score(["A", b]) do
     cond do
-      b == :rock -> 4
-      b == :paper -> 8
-      b == :scissors -> 3
+      b == "X" -> 4
+      b == "Y" -> 8
+      b == "Z" -> 3
     end
   end
 
-  defp score([:paper, b]) do
+  # oponent paper
+  defp score(["B", b]) do
     cond do
-      b == :rock -> 1
-      b == :paper -> 5
-      b == :scissors -> 9
+      b == "X" -> 1
+      b == "Y" -> 5
+      b == "Z" -> 9
     end
   end
 
-  defp score([:scissors, b]) do
+  # oponent scissors
+  defp score(["C", b]) do
     cond do
-      b == :rock -> 7
-      b == :paper -> 2
-      b == :scissors -> 6
-    end
-  end
-
-  def decode(input) do
-    input
-    |> String.split("\n", trim: true)
-    |> Enum.map(&decode_match/1)
-  end
-
-  defp decode_match(input) do
-    input
-    |> String.split(" ")
-    |> Enum.map(&decode_word/1)
-  end
-
-  defp decode_word(input) do
-    cond do
-      input == "A" || input == "X" -> :rock
-      input == "B" || input == "Y" -> :paper
-      input == "C" || input == "Z" -> :scissors
+      b == "X" -> 7
+      b == "Y" -> 2
+      b == "Z" -> 6
     end
   end
 end
@@ -61,9 +45,48 @@ defmodule Advent2022.Day02.Part2 do
   Part 2
   https://adventofcode.com/2022/day/2
   """
-
   def solve(input) do
-    :ok
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.map(&String.split/1)
+    |> Enum.map(&score/1)
+    |> Enum.sum()
+  end
+
+  # oponent rock
+  defp score(["A", b]) do
+    cond do
+      # scissors + 0
+      b == "X" -> 3
+      # rock + 3
+      b == "Y" -> 4
+      # paper + 6
+      b == "Z" -> 8
+    end
+  end
+
+  # oponent paper
+  defp score(["B", b]) do
+    cond do
+      # rock + 0
+      b == "X" -> 1
+      # paper + 3
+      b == "Y" -> 5
+      # scissors + 6
+      b == "Z" -> 9
+    end
+  end
+
+  # oponent scissors
+  defp score(["C", b]) do
+    cond do
+      # paper + 0
+      b == "X" -> 2
+      # scissors + 3
+      b == "Y" -> 6
+      # rock + 6
+      b == "Z" -> 7
+    end
   end
 end
 
