@@ -44,7 +44,7 @@ defmodule Mix.Tasks.Day01 do
 
     IO.puts("[Part 1]")
     IO.puts(Advent2022.Day01.Part1.solve(input))
-    IO.puts("\n[Part 2]")
+    IO.puts("[Part 2]")
     IO.puts(Advent2022.Day01.Part2.solve(input))
   end
 end
