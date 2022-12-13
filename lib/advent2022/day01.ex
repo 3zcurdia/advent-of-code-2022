@@ -4,23 +4,18 @@ defmodule Advent2022.Day01.Part1 do
   https://adventofcode.com/2022/day/1
   """
 
-  def elf_report(input) do
+  def solve(input) do
     input
     |> String.split("\n\n")
+    |> Enum.map(&sum_report/1)
+    |> Enum.max()
   end
 
   def sum_report(input) do
     input
-    |> String.split("\n")
+    |> String.split("\n", trim: true)
     |> Enum.map(&String.to_integer/1)
     |> Enum.sum()
-  end
-
-  def solve(input) do
-    input
-    |> elf_report()
-    |> Enum.map(&sum_report/1)
-    |> Enum.max
   end
 end
 
@@ -31,7 +26,13 @@ defmodule Advent2022.Day01.Part2 do
   """
 
   def solve(input) do
-    :part_2
+    input
+    |> String.split("\n\n")
+    |> Enum.map(&Advent2022.Day01.Part1.sum_report/1)
+    |> Enum.sort()
+    |> Enum.reverse()
+    |> Enum.take(3)
+    |> Enum.sum()
   end
 end
 
